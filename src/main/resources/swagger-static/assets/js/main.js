@@ -21,7 +21,7 @@ function choose(url) {
     $(".model a").on("click", function(e){
       e.preventDefault();
       var model = $(this).parent().attr("id")
-      var parentOffset = $(this).parent().offset(); 
+      var parentOffset = $(this).parent().offset();
       var encodedWord = encodeURI(model);
 
       if(!selectionImage) {
@@ -33,7 +33,7 @@ function choose(url) {
         $('div.model-container').append(selectionImage);
       }
 
-      selectionImage.load("/models/" + encodedWord + ".html")
+      selectionImage.load("models/" + encodedWord + ".html")
       selectionImage.attr('href',url.replace('{term}',encodeURI(model))).css({
         left: e.pageX + 20,
         top:  e.pageY - 10,
@@ -60,4 +60,3 @@ function goToAnchor() {
     window.scrollTo(0,$('a[name='+anchor+']').offset().top - 80);
   }
 }
-

@@ -25,14 +25,14 @@ object SwaggerDocGenerator extends BasicGenerator {
 
   override def templateDir = "src/main/resources/swagger-static"
 
-  val outputFolder = "samples/docs/swagger-static-docs"
+  val outputFolder = getStaticOutputPath("samples/docs/swagger-static-docs")
 
   // where to write generated code
   override def destinationDir = outputFolder + "/src/main/webapp"
 
   // template used for apis
   apiTemplateFiles += "operation.mustache" -> ".html"
-  
+
   modelTemplateFiles += "model.mustache" -> ".html"
 
   override def toDeclaration(obj: ModelProperty): (String, String) = {
@@ -81,6 +81,18 @@ object SwaggerDocGenerator extends BasicGenerator {
       }
     })
     mutable.toMap
+  }
+
+  def getStaticOutputPath(path: String) = {
+    System.getProperty("staticOutputPath") match {
+      case s: String => {
+        // return the system property
+        s
+      }
+      case _ => {
+        path
+      }
+    }
   }
 
   // package for models
